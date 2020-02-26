@@ -3,7 +3,7 @@ img {
   object-fit: contain;
   height: 200px;
 }
-.shop-name {
+.shop-name, .shoppingCart {
   font-family: 'Trade Winds';
 }
 
