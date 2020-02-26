@@ -3,6 +3,9 @@ img {
   object-fit: contain;
   height: 200px;
 }
+.shop-name {
+  font-family: 'Trade Winds';
+}
 
 .topBar {
   color: white;
