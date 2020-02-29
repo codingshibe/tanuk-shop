@@ -4,13 +4,14 @@ import ProductList from './ProductList';
 import ProductDetails from './ProductDetails';
 import CartSummary from './CartSummary';
 import CheckoutForm from './CheckoutForm';
+import InfoModal from './InfoModal';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       view: {
-        name: 'catalog',
+        name: 'modal',
         params: {}
       },
       cart: []
@@ -87,6 +88,10 @@ class App extends React.Component {
           <Header item={itemStatus} quantity={this.state.cart.length} cart={this.state.cart} setView={this.setView}/>
           <ProductList setView={this.setView} />
         </React.Fragment>
+      );
+    } else if (currentView === 'modal') {
+      return (
+        <InfoModal setView={this.setView} />
       );
     } else if (currentView === 'cart') {
       return (
