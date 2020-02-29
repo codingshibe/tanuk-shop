@@ -3,7 +3,7 @@ import React from 'react';
 class InfoModal extends React.Component {
   render() {
     return (
-      <div className="modal" role="dialog">
+      <div>
         <div className="modal-dialog" role="document">
           <div className="modal-content">
             <div className="modal-header">
