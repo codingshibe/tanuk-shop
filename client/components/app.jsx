@@ -91,7 +91,11 @@ class App extends React.Component {
       );
     } else if (currentView === 'modal') {
       return (
-        <InfoModal setView={this.setView} />
+        <React.Fragment>
+          <InfoModal setView={this.setView} />
+          <Header item={itemStatus} quantity={this.state.cart.length} cart={this.state.cart} />
+          <ProductList />
+        </React.Fragment>
       );
     } else if (currentView === 'cart') {
       return (

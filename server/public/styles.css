@@ -38,3 +38,11 @@ img {
   background-color: white;
   border: solid 1px rgb(230, 220, 220);
 }
+
+.info-modal {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
