@@ -46,3 +46,7 @@ img {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.card, .text-muted, .shoppingCart {
+  cursor: pointer;
+}
