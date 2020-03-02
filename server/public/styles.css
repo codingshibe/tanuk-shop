@@ -41,12 +41,14 @@ img {
 
 .info-modal {
   height: 100%;
+  width: 100%;
+  z-index: 2;
   position: fixed;
+  background-color: rgba(0, 0, 0, .3);
 }
 
 .modal-dialog {
   position: absolute;
-  z-index: 2;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
