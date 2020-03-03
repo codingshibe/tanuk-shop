@@ -94,7 +94,7 @@ class App extends React.Component {
         <React.Fragment>
           <InfoModal setView={this.setView} />
           <Header item={itemStatus} quantity={this.state.cart.length} cart={this.state.cart} />
-          <ProductList />
+          <ProductList setView={this.setView} />
         </React.Fragment>
       );
     } else if (currentView === 'cart') {

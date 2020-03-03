@@ -1,9 +1,20 @@
 import React from 'react';
 
 class InfoModal extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      modalStatus: 'info-modal'
+    };
+  }
+
+  hideModal() {
+    this.setState({ modalStatus: 'modal-hidden' });
+  }
+
   render() {
     return (
-      <div className="info-modal">
+      <div className={this.state.modalStatus}>
         <div className="modal-dialog" role="document">
           <div className="modal-content">
             <div className="modal-header">
@@ -13,7 +24,7 @@ class InfoModal extends React.Component {
               <p>This shop is for demonstration purposes only. By clicking &ldquo;I accept&rdquo;, the user agrees to the terms and will not provide actual personal information in the payment section and/or will not be actually purchasing items from this shop</p>
             </div>
             <div className="modal-footer">
-              <button className="btn btn-primary" onClick={() => this.props.setView('catalog', {})}>I accept</button>
+              <button className="btn btn-primary" onClick={() => this.hideModal()}>I accept</button>
             </div>
           </div>
         </div>

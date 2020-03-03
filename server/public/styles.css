@@ -57,3 +57,7 @@ img {
 .card, .text-muted, .shoppingCart {
   cursor: pointer;
 }
+
+.modal-hidden {
+  display: none;
+}
