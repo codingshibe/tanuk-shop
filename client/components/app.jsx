@@ -5,16 +5,18 @@ import ProductDetails from './ProductDetails';
 import CartSummary from './CartSummary';
 import CheckoutForm from './CheckoutForm';
 import InfoModal from './InfoModal';
+import ItemAddedModal from './ItemAddedModal';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       view: {
-        name: 'modal',
+        name: 'initial-load',
         params: {}
       },
-      cart: []
+      cart: [],
+      modalView: 'modal-hidden'
     };
     this.setView = this.setView.bind(this);
     this.addToCart = this.addToCart.bind(this);
@@ -26,7 +28,12 @@ class App extends React.Component {
   }
 
   setView(name, params) {
-    this.setState({ view: { name: name, params: params } });
+    const currentModalView = this.state.modalView;
+    if (currentModalView !== 'modal-hidden') {
+      this.setState({ view: { name: name, params: params }, modalView: 'modal-hidden' });
+    } else {
+      this.setState({ view: { name: name, params: params } });
+    }
   }
 
   addToCart(product) {
@@ -45,7 +52,7 @@ class App extends React.Component {
       .then(returnedProduct => {
         const currentCart = [...this.state.cart];
         currentCart.push(returnedProduct);
-        this.setState({ cart: currentCart });
+        this.setState({ cart: currentCart, modalView: 'info-modal' });
       })
       .catch(err => `There was an error: ${err}`);
   }
@@ -89,12 +96,12 @@ class App extends React.Component {
           <ProductList setView={this.setView} />
         </React.Fragment>
       );
-    } else if (currentView === 'modal') {
+    } else if (currentView === 'initial-load') {
       return (
         <React.Fragment>
           <InfoModal setView={this.setView} />
           <Header item={itemStatus} quantity={this.state.cart.length} cart={this.state.cart} />
-          <ProductList />
+          <ProductList setView={this.setView} />
         </React.Fragment>
       );
     } else if (currentView === 'cart') {
@@ -114,6 +121,7 @@ class App extends React.Component {
     }
     return (
       <React.Fragment>
+        <ItemAddedModal modalView={this.state.modalView} setView={this.setView}/>
         <Header item={itemStatus} quantity={this.state.cart.length} setView={this.setView} cart={this.state.cart} />
         <ProductDetails setView={this.setView} viewParams={this.state.view.params} addToCart={this.addToCart}/>
       </React.Fragment>
