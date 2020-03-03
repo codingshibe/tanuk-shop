@@ -100,7 +100,7 @@ class App extends React.Component {
       return (
         <React.Fragment>
           <InfoModal setView={this.setView} />
-          <Header item={itemStatus} quantity={this.state.cart.length} cart={this.state.cart} />
+          <Header item={itemStatus} quantity={this.state.cart.length} cart={this.state.cart} setView={this.setView} />
           <ProductList setView={this.setView} />
         </React.Fragment>
       );
