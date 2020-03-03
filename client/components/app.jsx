@@ -5,13 +5,14 @@ import ProductDetails from './ProductDetails';
 import CartSummary from './CartSummary';
 import CheckoutForm from './CheckoutForm';
 import InfoModal from './InfoModal';
+import ItemAddedModal from './ItemAddedModal';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       view: {
-        name: 'modal',
+        name: 'initial-load',
         params: {}
       },
       cart: []
@@ -89,7 +90,7 @@ class App extends React.Component {
           <ProductList setView={this.setView} />
         </React.Fragment>
       );
-    } else if (currentView === 'modal') {
+    } else if (currentView === 'initial-load') {
       return (
         <React.Fragment>
           <InfoModal setView={this.setView} />
@@ -114,6 +115,7 @@ class App extends React.Component {
     }
     return (
       <React.Fragment>
+        <ItemAddedModal />
         <Header item={itemStatus} quantity={this.state.cart.length} setView={this.setView} cart={this.state.cart} />
         <ProductDetails setView={this.setView} viewParams={this.state.view.params} addToCart={this.addToCart}/>
       </React.Fragment>
