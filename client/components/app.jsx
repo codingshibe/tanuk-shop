@@ -15,7 +15,8 @@ class App extends React.Component {
         name: 'initial-load',
         params: {}
       },
-      cart: []
+      cart: [],
+      modalView: 'modal-hidden'
     };
     this.setView = this.setView.bind(this);
     this.addToCart = this.addToCart.bind(this);
@@ -46,7 +47,7 @@ class App extends React.Component {
       .then(returnedProduct => {
         const currentCart = [...this.state.cart];
         currentCart.push(returnedProduct);
-        this.setState({ cart: currentCart });
+        this.setState({ cart: currentCart, modalView: 'info-modal' });
       })
       .catch(err => `There was an error: ${err}`);
   }
@@ -115,7 +116,7 @@ class App extends React.Component {
     }
     return (
       <React.Fragment>
-        <ItemAddedModal />
+        <ItemAddedModal modalView={this.state.modalView} setView={this.setView}/>
         <Header item={itemStatus} quantity={this.state.cart.length} setView={this.setView} cart={this.state.cart} />
         <ProductDetails setView={this.setView} viewParams={this.state.view.params} addToCart={this.addToCart}/>
       </React.Fragment>
