@@ -10,6 +10,7 @@ function CartSummaryItem(props) {
         <h4>{props.productName}</h4>
         <p className="text-muted">$ {(props.price / 100).toFixed(2)}</p>
         <p>{props.description}</p>
+        <div>Quantity: <span>{props.quantity}</span></div>
       </div>
     </div>
   );
