@@ -28,7 +28,12 @@ class App extends React.Component {
   }
 
   setView(name, params) {
-    this.setState({ view: { name: name, params: params } });
+    const currentModalView = this.state.modalView;
+    if (currentModalView !== 'modal-hidden') {
+      this.setState({ view: { name: name, params: params }, modalView: 'modal-hidden' });
+    } else {
+      this.setState({ view: { name: name, params: params } });
+    }
   }
 
   addToCart(product) {
