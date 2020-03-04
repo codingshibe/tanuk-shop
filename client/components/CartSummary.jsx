@@ -12,6 +12,7 @@ function CartSummary(props) {
       currentCart[keyToCheck] += 1;
     } else {
       currentCart[keyToCheck] = 1;
+      currentCart.product = cartItems[i];
     }
     console.log(currentCart);
   }
