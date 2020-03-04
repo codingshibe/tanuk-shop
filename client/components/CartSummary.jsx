@@ -10,8 +10,6 @@ function CartSummary(props) {
     const keyToCheck = cartItems[i].productId;
     if (keyToCheck in currentCart) {
       currentCart[keyToCheck].quantity += 1;
-      const price = cartItems[i].price;
-      currentCart[keyToCheck].product.price += price;
     } else {
       currentCart[keyToCheck] = {};
       currentCart[keyToCheck].quantity = 1;
@@ -21,7 +19,7 @@ function CartSummary(props) {
 
   const cartItemElements = [];
   for (const key in currentCart) {
-    cartItemElements.push(<CartSummaryItem key={key} image={currentCart[key].product.image} productName={currentCart[key].product.name} price={currentCart[key].product.price} description={currentCart[key].product.description} quantity={currentCart[key].quantity}/>);
+    cartItemElements.push(<CartSummaryItem key={key} image={currentCart[key].product.image} productName={currentCart[key].product.name} price={currentCart[key].product.price * currentCart[key].quantity} description={currentCart[key].product.description} quantity={currentCart[key].quantity}/>);
   }
   // If there isn't a key with a name of the array item.productId, create a new object property with the key of item.productId and a value of 1
   // If there is a key with the name of the array item.productId, increase the value by 1
