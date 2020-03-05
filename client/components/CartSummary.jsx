@@ -3,13 +3,38 @@ import CartSummaryItem from './CartSummaryItem';
 
 function CartSummary(props) {
   const cartItems = props.cartItems;
-  const cartItemElements = cartItems.map(item => {
-    return <CartSummaryItem key={item.productId} image={item.image} productName={item.name} price={item.price} description={item.shortDescription} />;
-  });
-  let totalPrice = 0;
+  // Create an empty object
+  const currentCart = {};
+  // Iterate through the cartItems array
   for (let i = 0; i < cartItems.length; i++) {
-    totalPrice += cartItems[i].price;
+    const keyToCheck = cartItems[i].productId;
+    if (keyToCheck in currentCart) {
+      currentCart[keyToCheck].quantity += 1;
+    } else {
+      currentCart[keyToCheck] = {};
+      currentCart[keyToCheck].quantity = 1;
+      currentCart[keyToCheck].product = cartItems[i];
+    }
   }
+
+  const cartItemElements = [];
+  for (const key in currentCart) {
+    cartItemElements.push(<CartSummaryItem key={key} image={currentCart[key].product.image} productName={currentCart[key].product.name} price={currentCart[key].product.price * currentCart[key].quantity} description={currentCart[key].product.description} quantity={currentCart[key].quantity}/>);
+  }
+  // If there isn't a key with a name of the array item.productId, create a new object property with the key of item.productId and a value of 1
+  // If there is a key with the name of the array item.productId, increase the value by 1
+  // const cartItemElements = cartItems.map(item => {
+  //   return <CartSummaryItem key={item.productId} image={item.image} productName={item.name} price={item.price} description={item.shortDescription} quantity="1"/>;
+  // });
+  let totalPrice = 0;
+  // for (let i = 0; i < cartItems.length; i++) {
+  //   totalPrice += cartItems[i].price;
+  // }
+
+  for (const key in currentCart) {
+    totalPrice += currentCart[key].product.price;
+  }
+
   if (cartItemElements.length === 0) {
     return (
       <div>
