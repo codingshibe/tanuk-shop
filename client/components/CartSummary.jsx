@@ -21,18 +21,13 @@ function CartSummary(props) {
   for (const key in currentCart) {
     cartItemElements.push(<CartSummaryItem key={key} image={currentCart[key].product.image} productName={currentCart[key].product.name} price={currentCart[key].product.price * currentCart[key].quantity} description={currentCart[key].product.description} quantity={currentCart[key].quantity}/>);
   }
-  // If there isn't a key with a name of the array item.productId, create a new object property with the key of item.productId and a value of 1
-  // If there is a key with the name of the array item.productId, increase the value by 1
-  // const cartItemElements = cartItems.map(item => {
-  //   return <CartSummaryItem key={item.productId} image={item.image} productName={item.name} price={item.price} description={item.shortDescription} quantity="1"/>;
-  // });
   let totalPrice = 0;
   // for (let i = 0; i < cartItems.length; i++) {
   //   totalPrice += cartItems[i].price;
   // }
 
   for (const key in currentCart) {
-    totalPrice += currentCart[key].product.price;
+    totalPrice += (currentCart[key].product.price * currentCart[key].quantity);
   }
 
   if (cartItemElements.length === 0) {
