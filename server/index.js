@@ -152,6 +152,18 @@ app.post('/api/orders', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.delete('/api/cart', (req, res, next) => {
+  // Check to make sure the parameter is a valid integer
+  // If not, call next...or throw error <-- Check with staff on which to use
+  // Check to make sure cartId exists
+  // If not, throw an error for missing shopping cartId
+  // Need to select all cartItemIds from cartItems where the cartId is equal to the req.session.cartId AND where the productId id equal to the productId of the product to delete an item from
+
+  // Save the result.rows to a variable
+  // If the variable has a length, select the first index and pass it as an argument $ for the SQL delete request
+  return ('Placeholder for now');
+});
+
 app.use('/api', (req, res, next) => {
   next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));
 });
