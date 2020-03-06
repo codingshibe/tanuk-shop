@@ -22,9 +22,6 @@ function CartSummary(props) {
     cartItemElements.push(<CartSummaryItem key={key} image={currentCart[key].product.image} productName={currentCart[key].product.name} price={currentCart[key].product.price * currentCart[key].quantity} description={currentCart[key].product.description} quantity={currentCart[key].quantity}/>);
   }
   let totalPrice = 0;
-  // for (let i = 0; i < cartItems.length; i++) {
-  //   totalPrice += cartItems[i].price;
-  // }
 
   for (const key in currentCart) {
     totalPrice += (currentCart[key].product.price * currentCart[key].quantity);
