@@ -153,15 +153,44 @@ app.post('/api/orders', (req, res, next) => {
 });
 
 app.delete('/api/cart/:productId', (req, res, next) => {
+  // Check to make sure cartId exists
+  // If not, throw an error for missing shopping cartId
+  if (!req.session.cartId) {
+    throw (new ClientError('Missing cartId', 404));
+
+  }
   // Check to make sure the parameter is a valid integer
   const productId = parseInt(req.params.productId);
   if (isNaN(productId) || productId < 1) {
     throw (new ClientError('Invalid value for productId', 400));
   }
-  res.status(200).json({ productId: productId });
+  // res.status(200).json({ productId: productId });
   // If not, call next...or throw error <-- Check with staff on which to use
-  // Check to make sure cartId exists
-  // If not, throw an error for missing shopping cartId
+  const cartId = req.session.cartId;
+  const sql = `SELECT "cartItemId"
+               FROM "cartItems"
+               WHERE  "productId" = $1 AND "cartId" = $2;`;
+  const values = [productId, cartId];
+  return db.query(sql, values)
+    .then(result => {
+      const returnedData = {};
+      if (result.rows.length === 0) {
+        throw (new ClientError('Could not find "cartItemId" that matches query', 404));
+      }
+      returnedData.cartItemId = result.rows[0].cartItemId;
+      return returnedData;
+    })
+    .then(data => {
+      const itemToDelete = [];
+      itemToDelete.push(data.cartItemId);
+      // res.status(200).json(itemToDelete);
+      const sql = `DELETE from "cartItems"
+                   WHERE "cartItemId" = $1;`;
+      db.query(sql, itemToDelete)
+        .then(result => res.status(200).json({ success: 'Item removed!' }))
+        .catch(err => next(err));
+    })
+    .catch(err => next(err));
   // Need to select all cartItemIds from cartItems where the cartId is equal to the req.session.cartId AND where the productId id equal to the productId of the product to delete an item from
 
   // Save the result.rows to a variable
