@@ -84,19 +84,18 @@ class App extends React.Component {
   }
 
   removeFromCart(product) {
-    console.log(`removeFromCart called with argument of ${product}`);
-    // const productId = product;
-    // const config = {
-    //   method: 'DELETE',
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   }
-    // };
-    // fetch(`/api/cart/${productId}`, config)
-    //   .then(data => {
-    //     this.getCartItems();
-    //   })
-    //   .catch(err => `There was an error: ${err}`);
+    const productId = product;
+    const config = {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    fetch(`/api/cart/${productId}`, config)
+      .then(data => {
+        this.getCartItems();
+      })
+      .catch(err => `There was an error: ${err}`);
   }
 
   render() {
