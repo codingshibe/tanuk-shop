@@ -83,6 +83,21 @@ class App extends React.Component {
       .catch(err => `There was an error: ${err}`);
   }
 
+  removeFromCart(product) {
+    const productId = product;
+    const config = {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    fetch(`/api/cart/${productId}`, config)
+      .then(data => {
+        this.getCartItems();
+      })
+      .catch(err => `There was an error: ${err}`);
+  }
+
   render() {
     let itemStatus = 'Items';
     if (this.state.cart.length === 1) {
@@ -108,7 +123,7 @@ class App extends React.Component {
       return (
         <React.Fragment>
           <Header item={itemStatus} quantity={this.state.cart.length} cart={this.state.cart} setView={this.setView}/>
-          <CartSummary cartItems={this.state.cart} setView={this.setView} />
+          <CartSummary cartItems={this.state.cart} setView={this.setView} removeItem={this.removeFromCart} />
         </React.Fragment>
       );
     } else if (currentView === 'checkout') {
