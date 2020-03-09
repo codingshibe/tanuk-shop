@@ -152,6 +152,43 @@ app.post('/api/orders', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.delete('/api/cart/:productId', (req, res, next) => {
+  if (!req.session.cartId) {
+    throw (new ClientError('Missing cartId', 404));
+  }
+
+  const productId = parseInt(req.params.productId);
+  if (isNaN(productId) || productId < 1) {
+    throw (new ClientError('Invalid value for productId', 400));
+  }
+
+  const cartId = req.session.cartId;
+  const sql = `SELECT "cartItemId"
+               FROM "cartItems"
+               WHERE  "productId" = $1 AND "cartId" = $2;`;
+  const values = [productId, cartId];
+  return db.query(sql, values)
+    .then(result => {
+      const returnedData = {};
+      if (result.rows.length === 0) {
+        throw (new ClientError('Could not find "cartItemId" that matches query', 404));
+      }
+      returnedData.cartItemId = result.rows[0].cartItemId;
+      return returnedData;
+    })
+    .then(data => {
+      const itemToDelete = [];
+      itemToDelete.push(data.cartItemId);
+      const sql = `DELETE from "cartItems"
+                   WHERE "cartItemId" = $1;`;
+      db.query(sql, itemToDelete)
+        .then(result => res.status(200).json({ success: 'Item removed!' }))
+        .catch(err => next(err));
+    })
+    .catch(err => next(err));
+
+});
+
 app.use('/api', (req, res, next) => {
   next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));
 });

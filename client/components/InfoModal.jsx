@@ -24,7 +24,7 @@ class InfoModal extends React.Component {
               <p>This shop is for demonstration purposes only. By clicking &ldquo;I accept&rdquo;, the user agrees to the terms and will not provide actual personal information in the payment section and/or will not be actually purchasing items from this shop</p>
             </div>
             <div className="modal-footer">
-              <button className="btn btn-primary" onClick={() => this.hideModal()}>I accept</button>
+              <button className="btn btn-success" onClick={() => this.hideModal()}>I accept</button>
             </div>
           </div>
         </div>
