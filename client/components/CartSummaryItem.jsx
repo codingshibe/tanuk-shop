@@ -10,7 +10,7 @@ function CartSummaryItem(props) {
         <h4>{props.productName}</h4>
         <p className="text-muted">$ {(props.price / 100).toFixed(2)}</p>
         <p>{props.description}</p>
-        <div>Quantity: <span>{props.quantity}</span> <button className="btn btn-sm btn-outline-success"><i className="fas fa-plus" /></button> <button className="btn btn-sm btn-outline-success"><i className="fas fa-minus"/></button></div>
+        <div>Quantity: <span>{props.quantity}</span> <button className="btn btn-sm btn-outline-success"><i className="fas fa-plus" /></button> <button className="btn btn-sm btn-outline-success" onClick={() => props.removeItem(props.id)}><i className="fas fa-minus"/></button></div>
       </div>
     </div>
   );
