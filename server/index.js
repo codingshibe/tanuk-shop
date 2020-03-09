@@ -152,8 +152,13 @@ app.post('/api/orders', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.delete('/api/cart', (req, res, next) => {
+app.delete('/api/cart/:productId', (req, res, next) => {
   // Check to make sure the parameter is a valid integer
+  const productId = parseInt(req.params.productId);
+  if (isNaN(productId) || productId < 1) {
+    throw (new ClientError('Invalid value for productId', 400));
+  }
+  res.status(200).json({ productId: productId });
   // If not, call next...or throw error <-- Check with staff on which to use
   // Check to make sure cartId exists
   // If not, throw an error for missing shopping cartId
@@ -161,7 +166,7 @@ app.delete('/api/cart', (req, res, next) => {
 
   // Save the result.rows to a variable
   // If the variable has a length, select the first index and pass it as an argument $ for the SQL delete request
-  return ('Placeholder for now');
+
 });
 
 app.use('/api', (req, res, next) => {
