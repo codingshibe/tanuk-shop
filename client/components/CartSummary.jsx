@@ -3,9 +3,7 @@ import CartSummaryItem from './CartSummaryItem';
 
 function CartSummary(props) {
   const cartItems = props.cartItems;
-  // Create an empty object
   const currentCart = {};
-  // Iterate through the cartItems array
   for (let i = 0; i < cartItems.length; i++) {
     const keyToCheck = cartItems[i].productId;
     if (keyToCheck in currentCart) {
