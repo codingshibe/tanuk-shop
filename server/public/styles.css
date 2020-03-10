@@ -54,10 +54,18 @@ img {
   transform: translate(-50%, -50%);
 }
 
-.card, .text-muted, .shoppingCart {
+.card, .text-muted, .shoppingCart, .quantity-toggle {
   cursor: pointer;
 }
 
 .modal-hidden {
   display: none;
+}
+
+.quantity-amount {
+  font-weight: bold;
+}
+
+.quantity-toggle {
+  color: green;
 }
