@@ -1,6 +1,12 @@
 import React from 'react';
 
 class CartSummaryItem extends React.Component {
+  handleRemove() {
+    if (this.props.quantity > 1) {
+      this.props.removeItem(this.props.productId);
+    }
+  }
+
   render() {
     return (
       <div className="row cartSummaryItem mx-5 my-2">
@@ -11,7 +17,7 @@ class CartSummaryItem extends React.Component {
           <h4>{this.props.productName}</h4>
           <p className="text-muted">$ {(this.props.price / 100).toFixed(2)}</p>
           <p>{this.props.description}</p>
-          <div>Quantity: <span>{this.props.quantity}</span> <button className="btn btn-sm btn-outline-success"><i className="fas fa-plus" /></button> <button className="btn btn-sm btn-outline-success" onClick={() => this.props.removeItem(this.props.productId)}><i className="fas fa-minus"/></button></div>
+          <div>Quantity: <span>{this.props.quantity}</span> <button className="btn btn-sm btn-outline-success"><i className="fas fa-plus" /></button> <button className="btn btn-sm btn-outline-success" onClick={() => this.handleRemove()}><i className="fas fa-minus"/></button></div>
         </div>
       </div>
     );
