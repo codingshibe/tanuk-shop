@@ -17,7 +17,7 @@ function CartSummary(props) {
 
   const cartItemElements = [];
   for (const key in currentCart) {
-    cartItemElements.push(<CartSummaryItem key={key} image={currentCart[key].product.image} productName={currentCart[key].product.name} price={currentCart[key].product.price * currentCart[key].quantity} description={currentCart[key].product.shortDescription} quantity={currentCart[key].quantity} productId={currentCart[key].product.productId} removeItem={props.removeItem} />);
+    cartItemElements.push(<CartSummaryItem key={key} image={currentCart[key].product.image} productName={currentCart[key].product.name} price={currentCart[key].product.price * currentCart[key].quantity} description={currentCart[key].product.shortDescription} quantity={currentCart[key].quantity} productId={currentCart[key].product.productId} removeItem={props.removeItem} addItem={props.addItem} product={currentCart[key].product}/>);
   }
   let totalPrice = 0;
 

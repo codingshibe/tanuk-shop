@@ -130,7 +130,7 @@ class App extends React.Component {
       return (
         <React.Fragment>
           <Header item={itemStatus} quantity={this.state.cart.length} cart={this.state.cart} setView={this.setView}/>
-          <CartSummary cartItems={this.state.cart} setView={this.setView} removeItem={this.removeFromCart} />
+          <CartSummary cartItems={this.state.cart} setView={this.setView} removeItem={this.removeFromCart} addItem={this.addToCart}/>
         </React.Fragment>
       );
     } else if (currentView === 'checkout') {
