@@ -21,6 +21,7 @@ class App extends React.Component {
     this.setView = this.setView.bind(this);
     this.addToCart = this.addToCart.bind(this);
     this.placeOrder = this.placeOrder.bind(this);
+    this.removeFromCart = this.removeFromCart.bind(this);
   }
 
   componentDidMount() {
@@ -37,6 +38,7 @@ class App extends React.Component {
   }
 
   addToCart(product) {
+    console.warn('addToCart called');
     const productToAdd = JSON.stringify(product);
     const config = {
       method: 'POST',
@@ -58,6 +60,7 @@ class App extends React.Component {
   }
 
   getCartItems() {
+    console.warn('getCartItems called');
     fetch('/api/cart')
       .then(data => data.json())
       .then(data => {
@@ -84,6 +87,7 @@ class App extends React.Component {
   }
 
   removeFromCart(product) {
+    console.warn('removeFromCart called');
     const productId = product;
     const config = {
       method: 'DELETE',
@@ -92,7 +96,10 @@ class App extends React.Component {
       }
     };
     fetch(`/api/cart/${productId}`, config)
-      .then(data => {
+      .then(result => {
+        return result.json();
+      })
+      .then(result => {
         this.getCartItems();
       })
       .catch(err => `There was an error: ${err}`);
