@@ -38,7 +38,6 @@ class App extends React.Component {
   }
 
   addToCart(product) {
-    console.warn('addToCart called');
     const productToAdd = JSON.stringify(product);
     const config = {
       method: 'POST',
@@ -60,7 +59,6 @@ class App extends React.Component {
   }
 
   getCartItems() {
-    console.warn('getCartItems called');
     fetch('/api/cart')
       .then(data => data.json())
       .then(data => {
@@ -87,7 +85,6 @@ class App extends React.Component {
   }
 
   removeFromCart(product) {
-    console.warn('removeFromCart called');
     const productId = product;
     const config = {
       method: 'DELETE',
