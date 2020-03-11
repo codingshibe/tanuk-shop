@@ -11,7 +11,7 @@ function WarningModal(props) {
           </div>
           <div className="modal-footer">
             <div className="col-12">
-              <button className="btn btn-secondary">Cancel</button> <button className="btn btn-danger"> Remove Item</button>
+              <button className="btn btn-secondary" onClick={() => props.hideModal()} >Cancel</button> <button className="btn btn-danger" onClick={() => props.deleteItem(props.productId)}> Remove Item</button>
             </div>
           </div>
         </div>

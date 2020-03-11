@@ -6,6 +6,7 @@ import CartSummary from './CartSummary';
 import CheckoutForm from './CheckoutForm';
 import InfoModal from './InfoModal';
 import ItemAddedModal from './ItemAddedModal';
+import WarningModal from './WarningModal';
 
 class App extends React.Component {
   constructor(props) {
@@ -27,14 +28,20 @@ class App extends React.Component {
     this.addToCart = this.addToCart.bind(this);
     this.placeOrder = this.placeOrder.bind(this);
     this.removeFromCart = this.removeFromCart.bind(this);
+    this.showWarningModal = this.showWarningModal.bind(this);
+    this.hideWarningModal = this.hideWarningModal.bind(this);
   }
 
   componentDidMount() {
     this.getCartItems();
   }
 
-  showWarningModal() {
-    return null;
+  showWarningModal(id, image, name) {
+    this.setState({ modal: { modalView: 'info-modal', productPhoto: image, productName: name, productId: id } });
+  }
+
+  hideWarningModal() {
+    this.setState({ modal: { modalView: 'modal-hidden', productPhoto: '', productName: '', productId: null } });
   }
 
   setView(name, params) {
@@ -62,7 +69,7 @@ class App extends React.Component {
       .then(returnedProduct => {
         const currentCart = [...this.state.cart];
         currentCart.push(returnedProduct);
-        this.setState({ cart: currentCart, modalView: 'info-modal' });
+        this.setState({ cart: currentCart, modal: { modalView: 'info-modal' } });
       })
       .catch(err => `There was an error: ${err}`);
   }
@@ -107,6 +114,9 @@ class App extends React.Component {
       })
       .then(result => {
         this.getCartItems();
+        if (this.state.modal.modalView === 'info-modal') {
+          this.setState({ modal: { modalView: 'modal-hidden', productId: null, productName: '', productPhoto: '' } });
+        }
       })
       .catch(err => `There was an error: ${err}`);
   }
@@ -135,8 +145,9 @@ class App extends React.Component {
     } else if (currentView === 'cart') {
       return (
         <React.Fragment>
+          <WarningModal modalStatus={this.state.modal.modalView} image={this.state.modal.productPhoto} productName={this.state.modal.productName} productId={this.state.modal.productId } hideModal={this.hideWarningModal} deleteItem={this.removeFromCart}/>
           <Header item={itemStatus} quantity={this.state.cart.length} cart={this.state.cart} setView={this.setView}/>
-          <CartSummary cartItems={this.state.cart} setView={this.setView} removeItem={this.removeFromCart} addItem={this.addToCart}/>
+          <CartSummary cartItems={this.state.cart} setView={this.setView} removeItem={this.removeFromCart} addItem={this.addToCart} showWarningModal={this.showWarningModal} />
         </React.Fragment>
       );
     } else if (currentView === 'checkout') {

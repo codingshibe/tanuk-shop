@@ -11,7 +11,7 @@ class CartSummaryItem extends React.Component {
     return (
       <React.Fragment>
         <div className="row cartSummaryItem mx-5 my-2">
-          <i className="fas fa-trash text-muted" onClick={() => this.props.showWarningModal()} />
+          <i className="fas fa-trash text-muted" onClick={() => this.props.showWarningModal(this.props.productId, this.props.image, this.props.productName)} />
 
           <img className="col-12 col-sm-12 col-md-3" src={this.props.image} />
           <div className="col-12 col-sm-11 col-md-7">
