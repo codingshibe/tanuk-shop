@@ -3,13 +3,15 @@ import React from 'react';
 class CartSummaryItem extends React.Component {
   handleSubtract() {
     if (this.props.quantity > 1) {
-      this.props.removeItem(this.props.productId);
+      this.props.removeItem(this.props.productId, 'one');
     }
   }
 
   render() {
     return (
       <div className="row cartSummaryItem mx-5 my-2">
+        <i className="fas fa-trash text-muted" />
+
         <img className="col-12 col-sm-12 col-md-3" src={this.props.image} />
         <div className="col-12 col-sm-11 col-md-7">
           <h4>{this.props.productName}</h4>
