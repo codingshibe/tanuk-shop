@@ -16,7 +16,12 @@ class App extends React.Component {
         params: {}
       },
       cart: [],
-      modalView: 'modal-hidden'
+      modal: {
+        modalView: 'modal-hidden',
+        productPhoto: '',
+        productName: '',
+        productId: null
+      }
     };
     this.setView = this.setView.bind(this);
     this.addToCart = this.addToCart.bind(this);
@@ -28,10 +33,14 @@ class App extends React.Component {
     this.getCartItems();
   }
 
+  showWarningModal() {
+    return null;
+  }
+
   setView(name, params) {
-    const currentModalView = this.state.modalView;
+    const currentModalView = this.state.modal.modalView;
     if (currentModalView !== 'modal-hidden') {
-      this.setState({ view: { name: name, params: params }, modalView: 'modal-hidden' });
+      this.setState({ view: { name: name, params: params }, modal: { modalView: 'modal-hidden' } });
     } else {
       this.setState({ view: { name: name, params: params } });
     }
@@ -140,7 +149,7 @@ class App extends React.Component {
     }
     return (
       <React.Fragment>
-        <ItemAddedModal modalView={this.state.modalView} setView={this.setView}/>
+        <ItemAddedModal modalView={this.state.modal.modalView} setView={this.setView}/>
         <Header item={itemStatus} quantity={this.state.cart.length} setView={this.setView} cart={this.state.cart} />
         <ProductDetails setView={this.setView} viewParams={this.state.view.params} addToCart={this.addToCart}/>
       </React.Fragment>
