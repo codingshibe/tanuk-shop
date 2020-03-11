@@ -69,7 +69,11 @@ class App extends React.Component {
       .then(returnedProduct => {
         const currentCart = [...this.state.cart];
         currentCart.push(returnedProduct);
-        this.setState({ cart: currentCart, modal: { modalView: 'info-modal' } });
+        if (this.state.view.name !== 'cart') {
+          this.setState({ cart: currentCart, modal: { modalView: 'info-modal' } });
+        } else {
+          this.setState({ cart: currentCart });
+        }
       })
       .catch(err => `There was an error: ${err}`);
   }
