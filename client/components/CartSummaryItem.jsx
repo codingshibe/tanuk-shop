@@ -10,7 +10,7 @@ class CartSummaryItem extends React.Component {
   render() {
     return (
       <div className="row cartSummaryItem mx-5 my-2">
-        <i className="fas fa-trash text-muted" />
+        <i className="fas fa-trash text-muted" onClick={() => this.props.removeItem(this.props.productId, 'all')} />
 
         <img className="col-12 col-sm-12 col-md-3" src={this.props.image} />
         <div className="col-12 col-sm-11 col-md-7">
