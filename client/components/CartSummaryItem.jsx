@@ -1,19 +1,30 @@
 import React from 'react';
 
-function CartSummaryItem(props) {
-  return (
-    <div className="row cartSummaryItem mx-5 my-2">
-      <div className="col-12 col-sm-12 col-md-3">
-        <img src={props.image} />
+class CartSummaryItem extends React.Component {
+  handleSubtract() {
+    if (this.props.quantity > 1) {
+      this.props.removeItem(this.props.productId);
+    }
+  }
+
+  render() {
+    return (
+      <div className="row cartSummaryItem mx-5 my-2">
+        <img className="col-12 col-sm-12 col-md-3" src={this.props.image} />
+        <div className="col-12 col-sm-11 col-md-7">
+          <h4>{this.props.productName}</h4>
+          <p className="text-muted">$ {(this.props.price / 100).toFixed(2)}</p>
+          <p>{this.props.description}</p>
+          <div>Quantity: <span className="btn-group">
+            <button className="btn quantity-toggle" onClick={() => this.props.addItem(this.props.product)}><i className="fas fa-plus" /></button>
+            <button className="btn quantity-amount" disabled>{this.props.quantity}</button>
+            <button className="btn quantity-toggle" onClick={() => this.handleSubtract()}><i className="fas fa-minus"/></button>
+          </span>
+          </div>
+        </div>
       </div>
-      <div className="col-12 col-sm-11 col-md-7">
-        <h4>{props.productName}</h4>
-        <p className="text-muted">$ {(props.price / 100).toFixed(2)}</p>
-        <p>{props.description}</p>
-        <div>Quantity: <span>{props.quantity}</span> <button className="btn btn-sm btn-outline-success"><i className="fas fa-plus" /></button> <button className="btn btn-sm btn-outline-success"><i className="fas fa-minus"/></button></div>
-      </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default CartSummaryItem;

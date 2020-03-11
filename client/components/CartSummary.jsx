@@ -3,9 +3,7 @@ import CartSummaryItem from './CartSummaryItem';
 
 function CartSummary(props) {
   const cartItems = props.cartItems;
-  // Create an empty object
   const currentCart = {};
-  // Iterate through the cartItems array
   for (let i = 0; i < cartItems.length; i++) {
     const keyToCheck = cartItems[i].productId;
     if (keyToCheck in currentCart) {
@@ -19,7 +17,7 @@ function CartSummary(props) {
 
   const cartItemElements = [];
   for (const key in currentCart) {
-    cartItemElements.push(<CartSummaryItem key={key} image={currentCart[key].product.image} productName={currentCart[key].product.name} price={currentCart[key].product.price * currentCart[key].quantity} description={currentCart[key].product.description} quantity={currentCart[key].quantity}/>);
+    cartItemElements.push(<CartSummaryItem key={key} image={currentCart[key].product.image} productName={currentCart[key].product.name} price={currentCart[key].product.price * currentCart[key].quantity} description={currentCart[key].product.shortDescription} quantity={currentCart[key].quantity} productId={currentCart[key].product.productId} removeItem={props.removeItem} addItem={props.addItem} product={currentCart[key].product}/>);
   }
   let totalPrice = 0;
 

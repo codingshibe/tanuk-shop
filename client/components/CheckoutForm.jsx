@@ -63,7 +63,7 @@ class CheckoutForm extends React.Component {
           <div className="row">
             <div className="col">
               <br />
-              <p onClick={() => this.props.setView('catalog', {})}>{'< Continue Shopping'}</p>
+              <p className="text-muted" onClick={() => this.props.setView('catalog', {})}>{'< Continue Shopping'}</p>
             </div>
           </div>
         </div>
