@@ -84,7 +84,7 @@ class App extends React.Component {
       .catch(err => `There was an error: ${err}`);
   }
 
-  removeFromCart(product) {
+  removeFromCart(product, quantity) {
     const productId = product;
     const config = {
       method: 'DELETE',
@@ -92,7 +92,7 @@ class App extends React.Component {
         'Content-Type': 'application/json'
       }
     };
-    fetch(`/api/cart/${productId}`, config)
+    fetch(`/api/cart/${productId}-${quantity}`, config)
       .then(result => {
         return result.json();
       })
