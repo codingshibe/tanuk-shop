@@ -135,15 +135,15 @@ app.post('/api/orders', (req, res, next) => {
   if (!req.session.cartId) {
     throw (new ClientError('missing shopping cart', 400));
   }
-  if (!req.body.name || !req.body.creditCard || !req.body.shippingAddress) {
+  if (!req.body.name || !req.body.lastName || !req.body.creditCard || !req.body.shippingAddress || !req.body.city || !req.body.state || !req.body.zip) {
     throw (new ClientError('Fields cannot be empty', 400));
   }
   const sql = `
-              insert into "orders" ("name", "creditCard", "shippingAddress", "cartId")
-              values ($1, $2, $3, $4)
+              insert into "orders" ("name", "lastName", "creditCard", "shippingAddress", "city", "state", "zip", "cartId")
+              values ($1, $2, $3, $4, $5, $6, $7, $8)
               returning *
               `;
-  const values = [req.body.name, req.body.creditCard, req.body.shippingAddress, req.session.cartId];
+  const values = [req.body.name, req.body.lastName, req.body.creditCard, req.body.shippingAddress, req.body.city, req.body.state, req.body.zip, req.session.cartId];
   db.query(sql, values)
     .then(result => {
       delete req.session.cartId;
