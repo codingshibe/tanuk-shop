@@ -5,8 +5,15 @@ class CheckoutForm extends React.Component {
     super(props);
     this.state = {
       name: '',
+      lastName: '',
       creditCard: '',
-      address: ''
+      month: '',
+      year: '',
+      cvv: '',
+      address: '',
+      city: '',
+      state: '',
+      zip: ''
 
     };
     this.handleNameInput = this.handleNameInput.bind(this);
