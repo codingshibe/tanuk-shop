@@ -138,7 +138,14 @@ CREATE TABLE public.orders (
     name text NOT NULL,
     "creditCard" text NOT NULL,
     "shippingAddress" text NOT NULL,
-    "createdAt" timestamp(6) with time zone DEFAULT now() NOT NULL
+    "createdAt" timestamp(6) with time zone DEFAULT now() NOT NULL,
+    city text NOT NULL,
+    state text NOT NULL,
+    zip text NOT NULL,
+    "lastName" text NOT NULL,
+    "ccMonth" text NOT NULL,
+    "ccYear" text NOT NULL,
+    "ccCVV" text NOT NULL
 );
 
 
@@ -260,6 +267,7 @@ COPY public."cartItems" ("cartItemId", "cartId", "productId", price) FROM stdin;
 29	22	3	2900
 30	22	6	830
 31	22	2	2595
+32	23	1	2999
 \.
 
 
@@ -290,6 +298,7 @@ COPY public.carts ("cartId", "createdAt") FROM stdin;
 20	2020-01-15 20:57:40.806823+00
 21	2020-01-16 01:31:06.256359+00
 22	2020-01-16 19:08:31.008716+00
+23	2020-03-12 21:43:37.646787+00
 \.
 
 
@@ -297,7 +306,7 @@ COPY public.carts ("cartId", "createdAt") FROM stdin;
 -- Data for Name: orders; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.orders ("orderId", "cartId", name, "creditCard", "shippingAddress", "createdAt") FROM stdin;
+COPY public.orders ("orderId", "cartId", name, "creditCard", "shippingAddress", "createdAt", city, state, zip, "lastName", "ccMonth", "ccYear", "ccCVV") FROM stdin;
 \.
 
 
@@ -319,14 +328,14 @@ COPY public.products ("productId", name, price, image, "shortDescription", "long
 -- Name: cartItems_cartItemId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."cartItems_cartItemId_seq"', 31, true);
+SELECT pg_catalog.setval('public."cartItems_cartItemId_seq"', 32, true);
 
 
 --
 -- Name: carts_cartId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."carts_cartId_seq"', 22, true);
+SELECT pg_catalog.setval('public."carts_cartId_seq"', 23, true);
 
 
 --
