@@ -51,19 +51,27 @@ class CheckoutForm extends React.Component {
           <div className="row">
             <div className="col-10">
               <form>
-                <div className="form-group">
-                  <label htmlFor="name">Name </label>
-                  <input type="text" className="form-control" value={this.state.name} placeholder="Name" id="name" onChange={this.handleNameInput} />
+                <div className="form-row">
+                  <div className="form-group col-md-6">First Name</div>
+                  <div className="form-group col-md-6">Last Name</div>
+                  <div className="form-group">Address</div>
                 </div>
-                <div className="form-group">
-                  <label htmlFor="creditCard">Credit Card </label>
-                  <input type="text" className="form-control" placeholder="XXXX XXXX XXXX" value={this.state.creditCard} id="creditCard" onChange={this.handleCreditCardInput} />
+                <div className="form-row">
+                  <div className="form-group col-md-6">City</div>
+                  <div className="form-group col-md-4">State</div>
+                  <div className="form-group col-md-2">Zip</div>
                 </div>
-                <div className="form-group">
-                  <label htmlFor="address">Address</label>
-                  <textarea className="form-control" rows="4" id="address" value={this.state.address} onChange={this.handleAddressInput} ></textarea>
+                <div className="form-row">
+                  <div className="form-group col-md-6">Credit Card</div>
+                  <div className="form-group col-md-2">Month</div>
+                  <div className="form-group col-md-2">Year</div>
+                  <div className="form-group col-md-2">CVV</div>
                 </div>
-                <button className="btn btn-primary" onClick={this.handleOrder} >Place Order</button>
+                <div className="form-row">
+                  <div className="form-group col-md-12">Checkbox</div>
+                  <button className="btn btn-success">Submit</button>
+                </div>
+
               </form>
             </div>
           </div>
