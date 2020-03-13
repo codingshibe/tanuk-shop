@@ -29,7 +29,7 @@ class CheckoutForm extends React.Component {
         agree: ''
       },
       button: {
-        isDisabled: true
+        isDisabled: false
       }
 
     };
@@ -80,12 +80,19 @@ class CheckoutForm extends React.Component {
 
   }
 
-  handleOrder(e) {
-    e.preventDefault();
+  handleOrder() {
     const orderToBeSent = {};
     orderToBeSent.name = this.state.name;
-    orderToBeSent.creditCard = this.state.creditCard;
+    orderToBeSent.lastName = this.state.lastName;
     orderToBeSent.shippingAddress = this.state.address;
+    orderToBeSent.city = this.state.city;
+    orderToBeSent.state = this.state.state;
+    orderToBeSent.zip = this.state.zip;
+    orderToBeSent.creditCard = this.state.creditCard;
+    orderToBeSent.ccMonth = this.state.month;
+    orderToBeSent.ccYear = this.state.year;
+    orderToBeSent.ccCVV = this.state.cvv;
+
     this.props.placeOrder(orderToBeSent);
   }
 
@@ -97,7 +104,7 @@ class CheckoutForm extends React.Component {
         <div className="container">
           <div className="row">
             <div className="col-10">
-              <form>
+              <form onSubmit={() => this.handleOrder() }>
                 <div className="form-row">
                   <h2>Checkout Form</h2>
                 </div>
