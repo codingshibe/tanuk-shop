@@ -7,8 +7,8 @@ class CheckoutForm extends React.Component {
       name: '',
       lastName: '',
       creditCard: '',
-      month: '',
-      year: '',
+      month: '01',
+      year: '2020',
       cvv: '',
       address: '',
       city: '',
@@ -86,7 +86,7 @@ class CheckoutForm extends React.Component {
   }
 
   handleAgreeInput(e) {
-    this.setState({ agree: e.target.value });
+    this.setState({ agree: e.target.checked });
   }
 
   handleOrder(e) {
@@ -111,7 +111,7 @@ class CheckoutForm extends React.Component {
                 <div className="form-row">
                   <div className="form-group col-md-6">
                     <label htmlFor="name">First Name</label>
-                    <input type="text" className="form-control" id="name" value={this.state.name} onChange={this.state.handleNameInput} />
+                    <input type="text" className="form-control" id="name" value={this.state.name} onChange={this.handleNameInput} />
                     <small className="form-text">{this.state.error.name}</small>
                   </div>
                   <div className="form-group col-md-6">
@@ -134,8 +134,8 @@ class CheckoutForm extends React.Component {
                   <div className="form-group col-md-4">
                     <label htmlFor="state">State</label>
                     <select className="form-control" value={this.state.state} id="state" onChange={this.handleStateInput}>
-                      <option>CA</option>
-                      <option>NV</option>
+                      <option value="CA">CA</option>
+                      <option value="NV">NV</option>
                     </select>
                     <small className="form-text">{this.state.error.state}</small>
                   </div>
@@ -154,30 +154,30 @@ class CheckoutForm extends React.Component {
                   <div className="form-group col-md-2">
                     <label htmlFor="month">Month</label>
                     <select className="form-control" value={this.state.month} id="month" onChange={this.handleMonthInput}>
-                      <option>01</option>
-                      <option>02</option>
-                      <option>03</option>
-                      <option>04</option>
-                      <option>05</option>
-                      <option>06</option>
-                      <option>07</option>
-                      <option>08</option>
-                      <option>09</option>
-                      <option>10</option>
-                      <option>11</option>
-                      <option>12</option>
+                      <option value="01">01</option>
+                      <option value="02">02</option>
+                      <option value="03">03</option>
+                      <option value="04">04</option>
+                      <option value="05">05</option>
+                      <option value="06">06</option>
+                      <option value="07">07</option>
+                      <option value="08">08</option>
+                      <option value="09">09</option>
+                      <option value="10">10</option>
+                      <option value="11">11</option>
+                      <option value="12">12</option>
                     </select>
                     <small className="form-text">{this.state.error.month}</small>
                   </div>
                   <div className="form-group col-md-2">
                     <label htmlFor="year">Year</label>
                     <select className="form-control" id="year" value={this.state.year} onChange={this.handleYearInput}>
-                      <option>2020</option>
-                      <option>2021</option>
-                      <option>2022</option>
-                      <option>2023</option>
-                      <option>2024</option>
-                      <option>2025</option>
+                      <option value="2020">2020</option>
+                      <option value="2021">2021</option>
+                      <option value="2022">2022</option>
+                      <option value="2023">2023</option>
+                      <option value="2024">2024</option>
+                      <option value="2025">2025</option>
                     </select>
                     <small className="form-text">{this.state.error.year}</small>
                   </div>
@@ -190,7 +190,7 @@ class CheckoutForm extends React.Component {
                 <div className="form-row">
                   <div className="form-group col-md-12">
                     <div className="form-check">
-                      <input type="checkbox" className="form-check-input" id="agree" value={this.state.agree} onChange={this.handleAgreeInput}/>
+                      <input type="checkbox" className="form-check-input" id="agree" checked={this.state.agree} onChange={this.handleAgreeInput}/>
                       <label htmlFor="agree"> I understand that this site is only for demonstration purposes and have not used real contact and/or credit card information. I do not hold the developer of this site responsible if real contact and/or credit card information was used </label>
                       <small className="form-text">{this.state.error.agree}</small>
                     </div>
