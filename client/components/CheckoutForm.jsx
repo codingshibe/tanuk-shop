@@ -16,7 +16,7 @@ class CheckoutForm extends React.Component {
       zip: '',
       agree: false,
       error: {
-        name: '',
+        name: 'First name required',
         lastName: '',
         address: '',
         city: '',
@@ -27,6 +27,9 @@ class CheckoutForm extends React.Component {
         year: '',
         cvv: '',
         agree: ''
+      },
+      button: {
+        isDisabled: true
       }
 
     };
@@ -87,6 +90,8 @@ class CheckoutForm extends React.Component {
   }
 
   render() {
+    const normalButton = <button className="btn btn-success">Submit</button>;
+    const disabledButton = <button className="btn btn-success" disabled>Submit</button>;
     return (
       <React.Fragment>
         <div className="container">
@@ -183,7 +188,7 @@ class CheckoutForm extends React.Component {
                       <small className="form-text">{this.state.error.agree}</small>
                     </div>
                   </div>
-                  <button className="btn btn-success">Submit</button>
+                  {this.state.button.isDisabled ? disabledButton : normalButton }
                 </div>
 
               </form>
