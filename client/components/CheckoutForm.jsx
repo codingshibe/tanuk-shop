@@ -16,7 +16,7 @@ class CheckoutForm extends React.Component {
       zip: '',
       agree: false,
       error: {
-        name: 'First name required',
+        name: '',
         lastName: '',
         address: '',
         city: '',
