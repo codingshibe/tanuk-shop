@@ -122,29 +122,29 @@ class CheckoutForm extends React.Component {
                 <div className="form-row">
                   <div className="form-group col-md-6">
                     <label htmlFor="name">First Name</label>
-                    <input type="text" name="name" className="form-control" id="name" value={this.state.name} onChange={this.handleInput} />
+                    <input type="text" name="name" className="form-control" id="name" value={this.state.name} onChange={this.handleInput} required />
                     <small className="form-text">{this.state.error.name}</small>
                   </div>
                   <div className="form-group col-md-6">
                     <label htmlFor="lastName">Last Name</label>
-                    <input type="text" name="lastName" className="form-control" id="lastName" value={this.state.lastName} onChange={this.handleInput} />
+                    <input type="text" name="lastName" className="form-control" id="lastName" value={this.state.lastName} onChange={this.handleInput} required />
                     <small className="form-text">{this.state.error.lastName}</small>
                   </div>
                   <div className="form-group col-md-12">
                     <label htmlFor="address">Address</label>
-                    <input type="text" name="address" className="form-control" id="address" value={this.state.address} onChange={this.handleInput} />
+                    <input type="text" name="address" className="form-control" id="address" value={this.state.address} onChange={this.handleInput} required />
                     <small className="form-text">{this.state.error.address}</small>
                   </div>
                 </div>
                 <div className="form-row">
                   <div className="form-group col-md-6">
                     <label htmlFor="city">City</label>
-                    <input type="text" name="city" className="form-control" id="city" value={this.state.city} onChange={this.handleInput} />
+                    <input type="text" name="city" className="form-control" id="city" value={this.state.city} onChange={this.handleInput} required />
                     <small className="form-text">{this.state.error.city}</small>
                   </div>
                   <div className="form-group col-md-4">
                     <label htmlFor="state">State</label>
-                    <select name="state" className="form-control" value={this.state.state} id="state" onChange={this.handleInput}>
+                    <select name="state" className="form-control" value={this.state.state} id="state" onChange={this.handleInput} required >
                       <option value="CA">CA</option>
                       <option value="NV">NV</option>
                     </select>
@@ -152,19 +152,19 @@ class CheckoutForm extends React.Component {
                   </div>
                   <div className="form-group col-md-2">
                     <label htmlFor="zip">Zip</label>
-                    <input type="text" name="zip" className="form-control" id="zip" value={this.state.zip} onChange={this.handleInput} />
+                    <input type="text" name="zip" className="form-control" id="zip" value={this.state.zip} onChange={this.handleInput} required />
                     <small className="form-text">{this.state.error.zip}</small>
                   </div>
                 </div>
                 <div className="form-row">
                   <div className="form-group col-md-6">
                     <label htmlFor="creditCard">Credit Card</label>
-                    <input type="text" name="creditCard" className="form-control" maxLength="16" id="creditCard" placeholder="XXXX XXXX XXXX XXXX" value={this.state.creditCard} onChange={this.handleInput} />
+                    <input type="text" name="creditCard" className="form-control" maxLength="16" id="creditCard" placeholder="XXXX XXXX XXXX XXXX" value={this.state.creditCard} onChange={this.handleInput} required />
                     <small className="form-text">{this.state.error.creditCard}</small>
                   </div>
                   <div className="form-group col-md-2">
                     <label htmlFor="month">Month</label>
-                    <select name="month" className="form-control" value={this.state.month} id="month" onChange={this.handleInput}>
+                    <select name="month" className="form-control" value={this.state.month} id="month" onChange={this.handleInput} required >
                       <option value="01">01</option>
                       <option value="02">02</option>
                       <option value="03">03</option>
@@ -182,7 +182,7 @@ class CheckoutForm extends React.Component {
                   </div>
                   <div className="form-group col-md-2">
                     <label htmlFor="year">Year</label>
-                    <select name="year" className="form-control" id="year" value={this.state.year} onChange={this.handleInput}>
+                    <select name="year" className="form-control" id="year" value={this.state.year} onChange={this.handleInput} required >
                       <option value="2020">2020</option>
                       <option value="2021">2021</option>
                       <option value="2022">2022</option>
@@ -194,14 +194,14 @@ class CheckoutForm extends React.Component {
                   </div>
                   <div className="form-group col-md-2">
                     <label htmlFor="cvv">CVV</label>
-                    <input type="text" name="cvv" className="form-control" maxLength="3" id="cvv" value={this.state.cvv} onChange={this.handleInput}/>
+                    <input type="text" name="cvv" className="form-control" maxLength="3" id="cvv" value={this.state.cvv} onChange={this.handleInput} required />
                     <small className="form-text">{this.state.error.cvv}</small>
                   </div>
                 </div>
                 <div className="form-row">
                   <div className="form-group col-md-12">
                     <div className="form-check">
-                      <input type="checkbox" name="agree" className="form-check-input" id="agree" checked={this.state.agree} onChange={this.handleInput}/>
+                      <input type="checkbox" name="agree" className="form-check-input" id="agree" checked={this.state.agree} onChange={this.handleInput} required/>
                       <label htmlFor="agree"> I understand that this site is only for demonstration purposes and have not used real contact and/or credit card information. I do not hold the developer of this site responsible if real contact and/or credit card information was used </label>
                       <small className="form-text">{this.state.error.agree}</small>
                     </div>
