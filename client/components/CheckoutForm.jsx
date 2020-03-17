@@ -26,9 +26,6 @@ class CheckoutForm extends React.Component {
         month: '',
         year: '',
         cvv: ''
-      },
-      button: {
-        isDisabled: true
       }
 
     };
