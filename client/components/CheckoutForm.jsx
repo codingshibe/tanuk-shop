@@ -115,7 +115,7 @@ class CheckoutForm extends React.Component {
         <div className="container">
           <div className="row">
             <div className="col-10">
-              <form onSubmit={ this.handleOrder }>
+              <form onSubmit={ this.handleOrder } noValidate>
                 <div className="form-row">
                   <h2>Checkout Form</h2>
                 </div>
