@@ -29,12 +29,13 @@ class CheckoutForm extends React.Component {
         agree: ''
       },
       button: {
-        isDisabled: false
+        isDisabled: true
       }
 
     };
     this.handleInput = this.handleInput.bind(this);
     this.handleOrder = this.handleOrder.bind(this);
+    this.validateInputs = this.validateInputs.bind(this);
 
   }
 
@@ -80,31 +81,41 @@ class CheckoutForm extends React.Component {
 
   }
 
-  handleOrder() {
-    const orderToBeSent = {};
-    orderToBeSent.name = this.state.name;
-    orderToBeSent.lastName = this.state.lastName;
-    orderToBeSent.shippingAddress = this.state.address;
-    orderToBeSent.city = this.state.city;
-    orderToBeSent.state = this.state.state;
-    orderToBeSent.zip = this.state.zip;
-    orderToBeSent.creditCard = this.state.creditCard;
-    orderToBeSent.ccMonth = this.state.month;
-    orderToBeSent.ccYear = this.state.year;
-    orderToBeSent.ccCVV = this.state.cvv;
+  validateInputs() {
+    return false;
 
-    this.props.placeOrder(orderToBeSent);
+  }
+
+  handleOrder(e) {
+    e.preventDefault();
+    this.validateInputs();
+    // const orderToBeSent = {};
+    // orderToBeSent.name = this.state.name;
+    // orderToBeSent.lastName = this.state.lastName;
+    // orderToBeSent.shippingAddress = this.state.address;
+    // orderToBeSent.city = this.state.city;
+    // orderToBeSent.state = this.state.state;
+    // orderToBeSent.zip = this.state.zip;
+    // orderToBeSent.creditCard = this.state.creditCard;
+    // orderToBeSent.ccMonth = this.state.month;
+    // orderToBeSent.ccYear = this.state.year;
+    // orderToBeSent.ccCVV = this.state.cvv;
+
+    // this.props.placeOrder(orderToBeSent);
   }
 
   render() {
-    const normalButton = <button className="btn btn-success">Submit</button>;
-    const disabledButton = <button className="btn btn-success" disabled>Submit</button>;
+    let submitButton = <button className="btn btn-success" disabled>Submit</button>;
+    if (this.state.name && this.state.lastName && this.state.address && this.state.city && this.state.zip && this.state.creditCard && this.state.cvv && this.state.agree) {
+      submitButton = <button className="btn btn-success">Submit</button>;
+
+    }
     return (
       <React.Fragment>
         <div className="container">
           <div className="row">
             <div className="col-10">
-              <form onSubmit={() => this.handleOrder() }>
+              <form onSubmit={ this.handleOrder }>
                 <div className="form-row">
                   <h2>Checkout Form</h2>
                 </div>
@@ -195,7 +206,7 @@ class CheckoutForm extends React.Component {
                       <small className="form-text">{this.state.error.agree}</small>
                     </div>
                   </div>
-                  {this.state.button.isDisabled ? disabledButton : normalButton }
+                  {submitButton}
                 </div>
 
               </form>
