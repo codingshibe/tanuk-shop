@@ -25,8 +25,7 @@ class CheckoutForm extends React.Component {
         creditCard: '',
         month: '',
         year: '',
-        cvv: '',
-        agree: ''
+        cvv: ''
       },
       button: {
         isDisabled: true
