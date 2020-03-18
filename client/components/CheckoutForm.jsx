@@ -2,6 +2,7 @@ import React from 'react';
 
 const nameRegex = /^[a-zA-Z]{2,32}$/;
 const creditCardRegex = /^\d{16}$/;
+const cityRegex = /^[^0-9]{3,50}$/;
 
 class CheckoutForm extends React.Component {
   constructor(props) {
@@ -39,7 +40,6 @@ class CheckoutForm extends React.Component {
   }
 
   handleInput(e) {
-    // e.preventDefault();
     const { name, value, checked } = e.target;
     const errors = this.state.errors;
     switch (name) {
@@ -56,7 +56,7 @@ class CheckoutForm extends React.Component {
         errors.address = value.length >= 6 ? '' : 'Address should be between 6 and 42 characters';
         break;
       case 'city':
-        this.setState({ city: value });
+        errors.city = cityRegex.test(value) ? '' : 'Invalid City Name';
         break;
       case 'state':
         this.setState({ state: value });
@@ -141,7 +141,7 @@ class CheckoutForm extends React.Component {
                 <div className="form-row">
                   <div className="form-group col-md-6">
                     <label htmlFor="city">City</label>
-                    <input type="text" name="city" className="form-control" id="city" value={this.state.city} onChange={this.handleInput} noValidate />
+                    <input type="text" name="city" className="form-control" id="city" value={this.state.city} maxLength="50" onChange={this.handleInput} noValidate />
                     <small className="form-text">{this.state.errors.city}</small>
                   </div>
                   <div className="form-group col-md-4">
