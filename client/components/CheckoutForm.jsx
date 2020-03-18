@@ -1,5 +1,8 @@
 import React from 'react';
-const nameRegex = /^[a-zA-Z]{2,32}$ /;
+
+const nameRegex = /^[a-zA-Z]{2,32}$/;
+const creditCardRegex = /^\d{16}$/;
+
 class CheckoutForm extends React.Component {
   constructor(props) {
     super(props);
@@ -36,17 +39,18 @@ class CheckoutForm extends React.Component {
   }
 
   handleInput(e) {
+    e.preventDefault();
     const { name, value, checked } = e.target;
     const errors = this.state.errors;
     switch (name) {
       case 'name':
-        errors.name = nameRegex.test(value) ? '' : 'First name must be between 2-32 characters with no numbers';
+        errors.name = nameRegex.test(value) ? '' : 'First name must be between 2-32 characters';
         break;
       case 'lastName':
-        errors.lastName = nameRegex.test(value) ? '' : 'Last name must be between 2-32 characters with no numbers';
+        errors.lastName = nameRegex.test(value) ? '' : 'Last name must be between 2-32 characters';
         break;
       case 'creditCard':
-        this.setState({ creditCard: value });
+        errors.creditCard = creditCardRegex.test(value) ? '' : 'Invalid Credit Card number';
         break;
       case 'address':
         this.setState({ address: value });
@@ -73,6 +77,8 @@ class CheckoutForm extends React.Component {
         this.setState({ agree: checked });
         break;
     }
+
+    this.setState({ errors, [name]: value });
 
   }
 
@@ -118,24 +124,24 @@ class CheckoutForm extends React.Component {
                   <div className="form-group col-md-6">
                     <label htmlFor="name">First Name</label>
                     <input type="text" name="name" className="form-control" id="name" value={this.state.name} onChange={this.handleInput} noValidate />
-                    <small className="form-text">{this.state.error.name}</small>
+                    <small className="form-text">{this.state.errors.name}</small>
                   </div>
                   <div className="form-group col-md-6">
                     <label htmlFor="lastName">Last Name</label>
                     <input type="text" name="lastName" className="form-control" id="lastName" value={this.state.lastName} onChange={this.handleInput} noValidate />
-                    <small className="form-text">{this.state.error.lastName}</small>
+                    <small className="form-text">{this.state.errors.lastName}</small>
                   </div>
                   <div className="form-group col-md-12">
                     <label htmlFor="address">Address</label>
                     <input type="text" name="address" className="form-control" id="address" value={this.state.address} onChange={this.handleInput} noValidate />
-                    <small className="form-text">{this.state.error.address}</small>
+                    <small className="form-text">{this.state.errors.address}</small>
                   </div>
                 </div>
                 <div className="form-row">
                   <div className="form-group col-md-6">
                     <label htmlFor="city">City</label>
                     <input type="text" name="city" className="form-control" id="city" value={this.state.city} onChange={this.handleInput} noValidate />
-                    <small className="form-text">{this.state.error.city}</small>
+                    <small className="form-text">{this.state.errors.city}</small>
                   </div>
                   <div className="form-group col-md-4">
                     <label htmlFor="state">State</label>
@@ -143,19 +149,19 @@ class CheckoutForm extends React.Component {
                       <option value="CA">CA</option>
                       <option value="NV">NV</option>
                     </select>
-                    <small className="form-text">{this.state.error.state}</small>
+                    <small className="form-text">{this.state.errors.state}</small>
                   </div>
                   <div className="form-group col-md-2">
                     <label htmlFor="zip">Zip</label>
                     <input type="text" name="zip" className="form-control" id="zip" value={this.state.zip} onChange={this.handleInput} noValidate />
-                    <small className="form-text">{this.state.error.zip}</small>
+                    <small className="form-text">{this.state.errors.zip}</small>
                   </div>
                 </div>
                 <div className="form-row">
                   <div className="form-group col-md-6">
                     <label htmlFor="creditCard">Credit Card</label>
                     <input type="text" name="creditCard" className="form-control" maxLength="16" id="creditCard" placeholder="XXXX XXXX XXXX XXXX" value={this.state.creditCard} onChange={this.handleInput} noValidate />
-                    <small className="form-text">{this.state.error.creditCard}</small>
+                    <small className="form-text">{this.state.errors.creditCard}</small>
                   </div>
                   <div className="form-group col-md-2">
                     <label htmlFor="month">Month</label>
@@ -173,7 +179,7 @@ class CheckoutForm extends React.Component {
                       <option value="11">11</option>
                       <option value="12">12</option>
                     </select>
-                    <small className="form-text">{this.state.error.month}</small>
+                    <small className="form-text">{this.state.errors.month}</small>
                   </div>
                   <div className="form-group col-md-2">
                     <label htmlFor="year">Year</label>
@@ -185,12 +191,12 @@ class CheckoutForm extends React.Component {
                       <option value="2024">2024</option>
                       <option value="2025">2025</option>
                     </select>
-                    <small className="form-text">{this.state.error.year}</small>
+                    <small className="form-text">{this.state.errors.year}</small>
                   </div>
                   <div className="form-group col-md-2">
                     <label htmlFor="cvv">CVV</label>
                     <input type="text" name="cvv" className="form-control" maxLength="3" id="cvv" value={this.state.cvv} onChange={this.handleInput} noValidate />
-                    <small className="form-text">{this.state.error.cvv}</small>
+                    <small className="form-text">{this.state.errors.cvv}</small>
                   </div>
                 </div>
                 <div className="form-row">
@@ -198,7 +204,7 @@ class CheckoutForm extends React.Component {
                     <div className="form-check">
                       <input type="checkbox" name="agree" className="form-check-input" id="agree" checked={this.state.agree} onChange={this.handleInput} noValidate/>
                       <label htmlFor="agree"> I understand that this site is only for demonstration purposes and have not used real contact and/or credit card information. I do not hold the developer of this site responsible if real contact and/or credit card information was used </label>
-                      <small className="form-text">{this.state.error.agree}</small>
+                      <small className="form-text">{this.state.errors.agree}</small>
                     </div>
                   </div>
                   {submitButton}
