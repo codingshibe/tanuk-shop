@@ -84,20 +84,21 @@ class CheckoutForm extends React.Component {
 
   handleOrder(e) {
     e.preventDefault();
-    this.validateInputs();
-    // const orderToBeSent = {};
-    // orderToBeSent.name = this.state.name;
-    // orderToBeSent.lastName = this.state.lastName;
-    // orderToBeSent.shippingAddress = this.state.address;
-    // orderToBeSent.city = this.state.city;
-    // orderToBeSent.state = this.state.state;
-    // orderToBeSent.zip = this.state.zip;
-    // orderToBeSent.creditCard = this.state.creditCard;
-    // orderToBeSent.ccMonth = this.state.month;
-    // orderToBeSent.ccYear = this.state.year;
-    // orderToBeSent.ccCVV = this.state.cvv;
+    if (this.validateInputs()) {
+      const orderToBeSent = {};
+      orderToBeSent.name = this.state.name;
+      orderToBeSent.lastName = this.state.lastName;
+      orderToBeSent.shippingAddress = this.state.address;
+      orderToBeSent.city = this.state.city;
+      orderToBeSent.state = this.state.state;
+      orderToBeSent.zip = this.state.zip;
+      orderToBeSent.creditCard = this.state.creditCard;
+      orderToBeSent.ccMonth = this.state.month;
+      orderToBeSent.ccYear = this.state.year;
+      orderToBeSent.ccCVV = this.state.cvv;
 
-    // this.props.placeOrder(orderToBeSent);
+      this.props.placeOrder(orderToBeSent);
+    }
   }
 
   render() {
