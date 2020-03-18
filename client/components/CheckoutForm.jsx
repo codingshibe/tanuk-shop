@@ -39,7 +39,7 @@ class CheckoutForm extends React.Component {
   }
 
   handleInput(e) {
-    e.preventDefault();
+    // e.preventDefault();
     const { name, value, checked } = e.target;
     const errors = this.state.errors;
     switch (name) {
@@ -77,8 +77,9 @@ class CheckoutForm extends React.Component {
         this.setState({ agree: checked });
         break;
     }
-
-    this.setState({ errors, [name]: value });
+    if (name !== 'agree') {
+      this.setState({ errors, [name]: value });
+    }
 
   }
 
