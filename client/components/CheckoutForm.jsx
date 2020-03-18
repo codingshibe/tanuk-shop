@@ -3,7 +3,8 @@ import React from 'react';
 const nameRegex = /^[a-zA-Z]{2,32}$/;
 const creditCardRegex = /^\d{16}$/;
 const cityRegex = /^[^0-9]{3,50}$/;
-const zipRegex = /^\d{5}/;
+const zipRegex = /^\d{5}$/;
+const cvvRegex = /^\d{3}$/;
 
 class CheckoutForm extends React.Component {
   constructor(props) {
@@ -27,8 +28,6 @@ class CheckoutForm extends React.Component {
         city: '',
         zip: '',
         creditCard: '',
-        month: '',
-        year: '',
         cvv: ''
       }
 
@@ -61,14 +60,8 @@ class CheckoutForm extends React.Component {
       case 'zip':
         errors.zip = zipRegex.test(value) ? '' : 'Invalid Zip';
         break;
-      case 'month':
-        this.setState({ month: value });
-        break;
-      case 'year':
-        this.setState({ year: value });
-        break;
       case 'cvv':
-        this.setState({ cvv: value });
+        errors.cvv = cvvRegex.test(value) ? '' : 'Invalid CVV';
         break;
       case 'agree':
         this.setState({ agree: checked });
@@ -81,7 +74,11 @@ class CheckoutForm extends React.Component {
   }
 
   validateInputs() {
-    return false;
+    const { errors } = this.state;
+    if (errors.name || errors.lastName || errors.creditCard || errors.address || errors.city || errors.zip || errors.cvv) {
+      return false;
+    }
+    return true;
 
   }
 
@@ -158,7 +155,7 @@ class CheckoutForm extends React.Component {
                 <div className="form-row">
                   <div className="form-group col-md-6">
                     <label htmlFor="creditCard">Credit Card</label>
-                    <input type="text" name="creditCard" className="form-control" maxLength="16" id="creditCard" placeholder="XXXX XXXX XXXX XXXX" value={this.state.creditCard} onChange={this.handleInput} noValidate />
+                    <input type="text" name="creditCard" className="form-control" maxLength="16" id="creditCard" placeholder="XXXXXXXXXXXXXXXX" value={this.state.creditCard} onChange={this.handleInput} noValidate />
                     <small className="form-text">{this.state.errors.creditCard}</small>
                   </div>
                   <div className="form-group col-md-2">
