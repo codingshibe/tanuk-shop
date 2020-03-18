@@ -1,5 +1,5 @@
 import React from 'react';
-
+const nameRegex = /^[a-zA-Z]{2,32}$ /;
 class CheckoutForm extends React.Component {
   constructor(props) {
     super(props);
@@ -15,7 +15,7 @@ class CheckoutForm extends React.Component {
       state: 'CA',
       zip: '',
       agree: false,
-      error: {
+      errors: {
         name: '',
         lastName: '',
         address: '',
@@ -36,15 +36,14 @@ class CheckoutForm extends React.Component {
   }
 
   handleInput(e) {
-    const target = e.target;
-    const name = target.name;
-    const value = target.value;
+    const { name, value, checked } = e.target;
+    const errors = this.state.errors;
     switch (name) {
       case 'name':
-        this.setState({ name: value });
+        errors.name = nameRegex.test(value) ? '' : 'First name must be between 2-32 characters with no numbers';
         break;
       case 'lastName':
-        this.setState({ lastName: value });
+        errors.lastName = nameRegex.test(value) ? '' : 'Last name must be between 2-32 characters with no numbers';
         break;
       case 'creditCard':
         this.setState({ creditCard: value });
@@ -71,7 +70,7 @@ class CheckoutForm extends React.Component {
         this.setState({ cvv: value });
         break;
       case 'agree':
-        this.setState({ agree: target.checked });
+        this.setState({ agree: checked });
         break;
     }
 
