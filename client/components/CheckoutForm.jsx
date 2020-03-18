@@ -53,7 +53,7 @@ class CheckoutForm extends React.Component {
         errors.creditCard = creditCardRegex.test(value) ? '' : 'Invalid Credit Card number';
         break;
       case 'address':
-        this.setState({ address: value });
+        errors.address = value.length >= 6 ? '' : 'Address should be between 6 and 42 characters';
         break;
       case 'city':
         this.setState({ city: value });
@@ -123,17 +123,17 @@ class CheckoutForm extends React.Component {
                 <div className="form-row">
                   <div className="form-group col-md-6">
                     <label htmlFor="name">First Name</label>
-                    <input type="text" name="name" className="form-control" id="name" value={this.state.name} onChange={this.handleInput} noValidate />
+                    <input type="text" name="name" className="form-control" id="name" value={this.state.name} maxLength="32" onChange={this.handleInput} noValidate />
                     <small className="form-text">{this.state.errors.name}</small>
                   </div>
                   <div className="form-group col-md-6">
                     <label htmlFor="lastName">Last Name</label>
-                    <input type="text" name="lastName" className="form-control" id="lastName" value={this.state.lastName} onChange={this.handleInput} noValidate />
+                    <input type="text" name="lastName" className="form-control" id="lastName" value={this.state.lastName} maxLength="32" onChange={this.handleInput} noValidate />
                     <small className="form-text">{this.state.errors.lastName}</small>
                   </div>
                   <div className="form-group col-md-12">
                     <label htmlFor="address">Address</label>
-                    <input type="text" name="address" className="form-control" id="address" value={this.state.address} onChange={this.handleInput} noValidate />
+                    <input type="text" name="address" className="form-control" id="address" value={this.state.address} maxLength="42" onChange={this.handleInput} noValidate />
                     <small className="form-text">{this.state.errors.address}</small>
                   </div>
                 </div>
