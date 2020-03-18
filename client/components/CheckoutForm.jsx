@@ -3,6 +3,7 @@ import React from 'react';
 const nameRegex = /^[a-zA-Z]{2,32}$/;
 const creditCardRegex = /^\d{16}$/;
 const cityRegex = /^[^0-9]{3,50}$/;
+const zipRegex = /^\d{5}/;
 
 class CheckoutForm extends React.Component {
   constructor(props) {
@@ -24,7 +25,6 @@ class CheckoutForm extends React.Component {
         lastName: '',
         address: '',
         city: '',
-        state: '',
         zip: '',
         creditCard: '',
         month: '',
@@ -58,11 +58,8 @@ class CheckoutForm extends React.Component {
       case 'city':
         errors.city = cityRegex.test(value) ? '' : 'Invalid City Name';
         break;
-      case 'state':
-        this.setState({ state: value });
-        break;
       case 'zip':
-        this.setState({ zip: value });
+        errors.zip = zipRegex.test(value) ? '' : 'Invalid Zip';
         break;
       case 'month':
         this.setState({ month: value });
