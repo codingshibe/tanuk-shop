@@ -151,7 +151,7 @@ class CheckoutForm extends React.Component {
                   </div>
                   <div className="form-group col-md-2">
                     <label htmlFor="zip">Zip</label>
-                    <input type="text" name="zip" className="form-control" id="zip" value={this.state.zip} onChange={this.handleInput} noValidate />
+                    <input type="text" name="zip" className="form-control" id="zip" value={this.state.zip} maxLength="5" onChange={this.handleInput} noValidate />
                     <small className="form-text">{this.state.errors.zip}</small>
                   </div>
                 </div>
