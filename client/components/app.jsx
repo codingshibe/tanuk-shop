@@ -7,6 +7,7 @@ import CheckoutForm from './CheckoutForm';
 import InfoModal from './InfoModal';
 import ItemAddedModal from './ItemAddedModal';
 import WarningModal from './WarningModal';
+import ThankYou from './ThankYou';
 
 class App extends React.Component {
   constructor(props) {
@@ -21,7 +22,8 @@ class App extends React.Component {
         modalView: 'modal-hidden',
         productPhoto: '',
         productName: '',
-        productId: null
+        productId: null,
+        thankYouView: 'modal-hidden'
       }
     };
     this.setView = this.setView.bind(this);
@@ -30,6 +32,7 @@ class App extends React.Component {
     this.removeFromCart = this.removeFromCart.bind(this);
     this.showWarningModal = this.showWarningModal.bind(this);
     this.hideWarningModal = this.hideWarningModal.bind(this);
+    this.hideThankYouModal = this.hideThankYouModal.bind(this);
   }
 
   componentDidMount() {
@@ -44,10 +47,15 @@ class App extends React.Component {
     this.setState({ modal: { modalView: 'modal-hidden', productPhoto: '', productName: '', productId: null } });
   }
 
+  hideThankYouModal() {
+    this.setState({ modal: { thankYouView: 'modal-hidden' } });
+    this.setView('initial-load', {});
+  }
+
   setView(name, params) {
     const currentModalView = this.state.modal.modalView;
     if (currentModalView !== 'modal-hidden') {
-      this.setState({ view: { name: name, params: params }, modal: { modalView: 'modal-hidden' } });
+      this.setState({ view: { name: name, params: params }, modal: { modalView: 'modal-hidden', thankYouView: 'modal-hidden' } });
     } else {
       this.setState({ view: { name: name, params: params } });
     }
@@ -98,8 +106,8 @@ class App extends React.Component {
     fetch('/api/orders', config)
       .then(data => data.json())
       .then(data => {
-        this.setState({ cart: [] });
-        this.setView('catalog', {});
+        this.setState({ cart: [], modal: { thankYouView: 'info-modal' } });
+        // this.setView('catalog', {});
       })
       .catch(err => `There was an error: ${err}`);
   }
@@ -157,6 +165,7 @@ class App extends React.Component {
     } else if (currentView === 'checkout') {
       return (
         <React.Fragment>
+          <ThankYou modalStatus={this.state.modal.thankYouView} closeModal={this.hideThankYouModal} />
           <Header item={itemStatus} quantity={this.state.cart.length} cart={this.state.cart} setView={this.setView} />
           <CheckoutForm placeOrder={this.placeOrder} setView={this.setView}/>
         </React.Fragment>
