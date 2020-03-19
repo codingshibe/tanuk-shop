@@ -21,7 +21,8 @@ class App extends React.Component {
         modalView: 'modal-hidden',
         productPhoto: '',
         productName: '',
-        productId: null
+        productId: null,
+        thankYouView: 'modal-hidden'
       }
     };
     this.setView = this.setView.bind(this);
