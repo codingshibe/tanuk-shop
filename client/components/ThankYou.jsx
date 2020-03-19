@@ -2,7 +2,7 @@ import React from 'react';
 
 function ThankYou(props) {
   return (
-    <div className={props.thankYouView}>
+    <div className={props.modalStatus}>
       <div className="modal-dialog" role="document">
         <div className="modal-content">
           <div className="modal-header">
