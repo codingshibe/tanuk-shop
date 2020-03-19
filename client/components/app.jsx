@@ -7,6 +7,7 @@ import CheckoutForm from './CheckoutForm';
 import InfoModal from './InfoModal';
 import ItemAddedModal from './ItemAddedModal';
 import WarningModal from './WarningModal';
+import ThankYou from './ThankYou';
 
 class App extends React.Component {
   constructor(props) {
@@ -31,6 +32,7 @@ class App extends React.Component {
     this.removeFromCart = this.removeFromCart.bind(this);
     this.showWarningModal = this.showWarningModal.bind(this);
     this.hideWarningModal = this.hideWarningModal.bind(this);
+    this.hideThankYouModal = this.hideThankYouModal.bind(this);
   }
 
   componentDidMount() {
@@ -43,6 +45,10 @@ class App extends React.Component {
 
   hideWarningModal() {
     this.setState({ modal: { modalView: 'modal-hidden', productPhoto: '', productName: '', productId: null } });
+  }
+
+  hideThankYouModal() {
+    this.setState({ modal: { thankYouView: 'modal-hidden' } });
   }
 
   setView(name, params) {
@@ -99,7 +105,7 @@ class App extends React.Component {
     fetch('/api/orders', config)
       .then(data => data.json())
       .then(data => {
-        this.setState({ cart: [] });
+        this.setState({ cart: [], modal: { thankYouView: 'info-modal' } });
         this.setView('catalog', {});
       })
       .catch(err => `There was an error: ${err}`);
@@ -136,6 +142,7 @@ class App extends React.Component {
       return (
         <React.Fragment>
           <Header item={itemStatus} quantity={this.state.cart.length} cart={this.state.cart} setView={this.setView}/>
+          <ThankYou thankYouView={this.state.modal.thankYouView} closeModal={this.hideThankYouModal} />
           <ProductList setView={this.setView} />
         </React.Fragment>
       );
