@@ -49,7 +49,7 @@ class App extends React.Component {
 
   hideThankYouModal() {
     this.setState({ modal: { thankYouView: 'modal-hidden' } });
-    this.setView('initial', {});
+    this.setView('initial-load', {});
   }
 
   setView(name, params) {

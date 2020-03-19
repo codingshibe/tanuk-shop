@@ -9,7 +9,7 @@ function ThankYou(props) {
             <h5 className="modal-title"><i className="fas fa-leaf" /> Thank You</h5>
           </div>
           <div className="modal-body">
-            <p>Thank you for checking out my e-commerce content management demonstration</p>
+            <p>This was a demonstration of an E-Commerce Full Stack Content Management Application. This application was built using HTML5, CSS3, React.js, Express.js, Node.js, PostgreSQL and Bootstrap 4. Thank you for trying out my demo!</p>
           </div>
           <div className="modal-footer">
             <button className="btn btn-success" onClick={() => props.closeModal() }>Close</button>
