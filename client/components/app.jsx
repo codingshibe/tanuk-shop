@@ -127,7 +127,7 @@ class App extends React.Component {
       .then(result => {
         this.getCartItems();
         if (this.state.modal.modalView === 'info-modal') {
-          this.setState({ modal: { modalView: 'modal-hidden', productId: null, productName: '', productPhoto: '' } });
+          this.setState({ modal: { modalView: 'modal-hidden', productId: null, productName: '', productPhoto: '', thankYouView: 'modal-hidden' } });
         }
       })
       .catch(err => `There was an error: ${err}`);
