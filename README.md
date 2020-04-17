@@ -23,9 +23,7 @@ Tanuk Shop can be found here: [https://tanuk.acanlas.dev](https://tanuk.acanlas.
 - User can remove shopping cart items
 - User can view total price of all cart items
 - User can update quantity of products in cart
-- User can place order*
-
-* This is not an actual store. Please do not enter personal information
+- User can place order (This is not an actual store. Please do not enter personal information)
 
 ## Preview
 ![Tanuk Shop](./tanukdemo.gif)
