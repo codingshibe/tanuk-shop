@@ -65,13 +65,16 @@ class CheckoutForm extends React.Component {
         errors.zip = zipRegex.test(value) ? '' : 'Invalid Zip';
         break;
       case 'cvv':
+        if (value === '' || numRegex.test(value)) {
+          this.setState({ [name]: value });
+        }
         errors.cvv = cvvRegex.test(value) ? '' : 'Invalid CVV';
         break;
       case 'agree':
         this.setState({ agree: checked });
         break;
     }
-    if (name !== 'agree' && name !== 'creditCard') {
+    if (name !== 'agree' && name !== 'creditCard' && name !== 'zip' && name !== 'cvv') {
       this.setState({ errors, [name]: value });
     }
 
