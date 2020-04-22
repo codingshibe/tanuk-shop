@@ -62,6 +62,9 @@ class CheckoutForm extends React.Component {
         errors.city = cityRegex.test(value) ? '' : 'Invalid City Name';
         break;
       case 'zip':
+        if (value === '' || numRegex.test(value)) {
+          this.setState({ [name]: value });
+        }
         errors.zip = zipRegex.test(value) ? '' : 'Invalid Zip';
         break;
       case 'cvv':
