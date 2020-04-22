@@ -5,6 +5,7 @@ const creditCardRegex = /^\d{16}$/;
 const cityRegex = /^[^0-9]{3,50}$/;
 const zipRegex = /^\d{5}$/;
 const cvvRegex = /^\d{3,4}$/;
+const numRegex = /^[0-9\b]+$/;
 
 class CheckoutForm extends React.Component {
   constructor(props) {
@@ -49,6 +50,9 @@ class CheckoutForm extends React.Component {
         errors.lastName = nameRegex.test(value) ? '' : 'Last name must be between 2-32 characters';
         break;
       case 'creditCard':
+        if (value === '' || numRegex.test(value)) {
+          this.setState({ [name]: value });
+        }
         errors.creditCard = creditCardRegex.test(value) ? '' : 'Invalid Credit Card number';
         break;
       case 'address':
@@ -67,7 +71,7 @@ class CheckoutForm extends React.Component {
         this.setState({ agree: checked });
         break;
     }
-    if (name !== 'agree') {
+    if (name !== 'agree' && name !== 'creditCard') {
       this.setState({ errors, [name]: value });
     }
 
