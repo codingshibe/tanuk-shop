@@ -4,7 +4,7 @@ const nameRegex = /^[a-zA-Z]{2,32}$/;
 const creditCardRegex = /^\d{16}$/;
 const cityRegex = /^[^0-9]{3,50}$/;
 const zipRegex = /^\d{5}$/;
-const cvvRegex = /^\d{3}$/;
+const cvvRegex = /^\d{3,4}$/;
 
 class CheckoutForm extends React.Component {
   constructor(props) {
@@ -191,7 +191,7 @@ class CheckoutForm extends React.Component {
                   </div>
                   <div className="form-group col-md-2">
                     <label htmlFor="cvv">CVV</label>
-                    <input type="text" name="cvv" className="form-control" maxLength="3" id="cvv" value={this.state.cvv} onChange={this.handleInput} noValidate />
+                    <input type="text" name="cvv" className="form-control" maxLength="4" id="cvv" value={this.state.cvv} onChange={this.handleInput} noValidate />
                     <small className="form-text">{this.state.errors.cvv}</small>
                   </div>
                 </div>
