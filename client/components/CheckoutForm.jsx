@@ -4,7 +4,8 @@ const nameRegex = /^[a-zA-Z]{2,32}$/;
 const creditCardRegex = /^\d{16}$/;
 const cityRegex = /^[^0-9]{3,50}$/;
 const zipRegex = /^\d{5}$/;
-const cvvRegex = /^\d{3}$/;
+const cvvRegex = /^\d{3,4}$/;
+const numRegex = /^[0-9\b]+$/;
 
 class CheckoutForm extends React.Component {
   constructor(props) {
@@ -49,6 +50,9 @@ class CheckoutForm extends React.Component {
         errors.lastName = nameRegex.test(value) ? '' : 'Last name must be between 2-32 characters';
         break;
       case 'creditCard':
+        if (value === '' || numRegex.test(value)) {
+          this.setState({ [name]: value });
+        }
         errors.creditCard = creditCardRegex.test(value) ? '' : 'Invalid Credit Card number';
         break;
       case 'address':
@@ -58,16 +62,22 @@ class CheckoutForm extends React.Component {
         errors.city = cityRegex.test(value) ? '' : 'Invalid City Name';
         break;
       case 'zip':
+        if (value === '' || numRegex.test(value)) {
+          this.setState({ [name]: value });
+        }
         errors.zip = zipRegex.test(value) ? '' : 'Invalid Zip';
         break;
       case 'cvv':
+        if (value === '' || numRegex.test(value)) {
+          this.setState({ [name]: value });
+        }
         errors.cvv = cvvRegex.test(value) ? '' : 'Invalid CVV';
         break;
       case 'agree':
         this.setState({ agree: checked });
         break;
     }
-    if (name !== 'agree') {
+    if (name !== 'agree' && name !== 'creditCard' && name !== 'zip' && name !== 'cvv') {
       this.setState({ errors, [name]: value });
     }
 
@@ -191,7 +201,7 @@ class CheckoutForm extends React.Component {
                   </div>
                   <div className="form-group col-md-2">
                     <label htmlFor="cvv">CVV</label>
-                    <input type="text" name="cvv" className="form-control" maxLength="3" id="cvv" value={this.state.cvv} onChange={this.handleInput} noValidate />
+                    <input type="text" name="cvv" className="form-control" maxLength="4" id="cvv" value={this.state.cvv} onChange={this.handleInput} noValidate />
                     <small className="form-text">{this.state.errors.cvv}</small>
                   </div>
                 </div>
